@@ -72,3 +72,15 @@ def fold_run(fold):
     # calculate & print accuracy
     accuracy = metrics.accuracy_score(y_valid, preds)
     print(f"Fold={fold}, Accuracy={accuracy}")
+
+    
+    
+from sklearn.impute import SimpleImputer
+# make copy to avoid changing original data (when Imputing)
+new_data = data.copy()
+new_test = data_test.copy()
+new_data = new_data.drop('claim', axis = 1)
+# Imputation
+my_imputer = SimpleImputer()
+new_data = my_imputer.fit_transform(new_data)
+new_test = my_imputer.transform(new_test)
